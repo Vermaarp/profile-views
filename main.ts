@@ -64,11 +64,14 @@ function renderBadge(count: number, label: string, color: string, format: string
   const value = formatCount(count, format);
   const safeLabel = escapeXML(label);
   const [c1, c2] = resolveColor(color);
-  const H = 28;
-  const avgW = 7.2;
-  const lw = Math.ceil(safeLabel.length * avgW) + 30;
-  const vw = Math.ceil(value.length * avgW) + 30;
+  const H = 20;
+  const avgW = 5.8;
+  const padX = 7;
+  const lw = Math.ceil(safeLabel.length * avgW) + padX * 2;
+  const vw = Math.ceil(value.length * avgW) + padX * 2;
   const tw = lw + vw;
+  const rx = H / 2;
+  const ty = Math.round(H / 2 + 4);
   const gid = Math.random().toString(36).slice(2, 7);
   const font = "-apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif";
 
@@ -87,7 +90,7 @@ function renderBadge(count: number, label: string, color: string, format: string
       <stop offset="0%" stop-color="#fff" stop-opacity="0.28"/>
       <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
     </linearGradient>
-    <clipPath id="${gid}-c"><rect width="${tw}" height="${H}" rx="14"/></clipPath>
+    <clipPath id="${gid}-c"><rect width="${tw}" height="${H}" rx="${rx}"/></clipPath>
   </defs>
   <g clip-path="url(#${gid}-c)">
     <rect width="${tw}" height="${H}" fill="rgba(20,20,30,0.85)"/>
@@ -96,10 +99,10 @@ function renderBadge(count: number, label: string, color: string, format: string
     <rect width="${tw}" height="${H}" fill="url(#${gid}-s)"/>
     <rect width="${tw}" height="${H / 2}" fill="url(#${gid}-t)"/>
     <rect x="${lw - 0.5}" width="1" height="${H}" fill="rgba(255,255,255,0.1)"/>
-    <rect width="${tw}" height="${H}" rx="14" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+    <rect width="${tw}" height="${H}" rx="${rx}" fill="none" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
   </g>
-  <text x="${lw / 2}" y="18" text-anchor="middle" font-family="${font}" font-size="12" font-weight="500" fill="rgba(255,255,255,0.72)">${safeLabel}</text>
-  <text x="${lw + vw / 2}" y="18" text-anchor="middle" font-family="${font}" font-size="12" font-weight="600" fill="#ffffff">${value}</text>
+  <text x="${lw / 2}" y="${ty}" text-anchor="middle" font-family="${font}" font-size="11" font-weight="500" fill="rgba(255,255,255,0.72)">${safeLabel}</text>
+  <text x="${lw + vw / 2}" y="${ty}" text-anchor="middle" font-family="${font}" font-size="11" font-weight="600" fill="#ffffff">${value}</text>
 </svg>`.trim();
 }
 
