@@ -5,8 +5,6 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Runtime](https://img.shields.io/badge/runtime-Deno_Deploy-000000)
 ![Free](https://img.shields.io/badge/cost-free-brightgreen)
-![Profile Views](https://profile-views.vermaarp.deno.net/badge/vermaarp?color=blue)
-
 ---
 
 ## Why self-host?
@@ -80,6 +78,16 @@ Replace `<your-project>` with your actual Deno Deploy subdomain, and `<your-user
 ![](https://<your-project>.deno.net/badge/<your-username>?color=pink)
 ![](https://<your-project>.deno.net/badge/<your-username>?color=red)
 ```
+### Preview
+
+![Profile Views](https://profile-views.vermaarp.deno.net/badge/vermaarp?color=blue)
+![Profile Views](https://profile-views.vermaarp.deno.net/badge/vermaarp?color=green)
+![Profile Views](https://profile-views.vermaarp.deno.net/badge/vermaarp?color=purple)
+![Profile Views](https://profile-views.vermaarp.deno.net/badge/vermaarp?color=orange)
+![Profile Views](https://profile-views.vermaarp.deno.net/badge/vermaarp?color=teal)
+![Profile Views](https://profile-views.vermaarp.deno.net/badge/vermaarp?color=pink)
+![Profile Views](https://profile-views.vermaarp.deno.net/badge/vermaarp?color=red)
+
 
 Or a custom hex: `?color=ff6b6b`.
 
