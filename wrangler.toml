@@ -8,8 +8,8 @@ VERSION = "1.0.0"
 
 [[kv_namespaces]]
 binding = "KV"
-id = "YOUR_KV_NAMESPACE_ID"          # replace after `wrangler kv:namespace create VIEWS`
-preview_id = "YOUR_PREVIEW_KV_ID"   # replace with preview namespace id
+id = "e23e1c590416440c82543efc0327035d"
+preview_id = "711e17950ffc439bad54fcc7c80c5711"
 
 [placement]
 mode = "smart"   # Cloudflare Smart Placement for optimal latency
