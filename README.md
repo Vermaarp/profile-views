@@ -1,213 +1,147 @@
-# 👁️ Profile Views Counter
+# Profile Views
 
-> Open-source, serverless, privacy-safe GitHub profile view counter with Apple-style glass SVG badges.
+> Open-source, serverless, privacy-safe profile view counter with glass-style SVG badges. Runs entirely on **Deno Deploy** — no servers, no databases, no cost.
 
 ![License](https://img.shields.io/badge/license-MIT-blue)
-![Cloudflare Workers](https://img.shields.io/badge/hosted_on-Cloudflare_Workers-orange)
-![Free](https://img.shields.io/badge/cost-100%25_free-brightgreen)
-![Profile Views](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=blue)
+![Runtime](https://img.shields.io/badge/runtime-Deno_Deploy-000000)
+![Free](https://img.shields.io/badge/cost-free-brightgreen)
 
 ---
 
-## ✨ Features
+## Why self-host?
 
-- 🔢 **Total views** + **unique visitors** + **daily stats**
-- 🍎 **Apple-style glass badge** — frosted glass effect with gradient shimmer
-- 🎨 **Fully customizable** — color, label, format, type
-- 🚫 **Bot filtering** — heuristic-based, no false positives
-- 🛡️ **Rate limiting** — prevents artificial inflation
-- 🔒 **Privacy-safe** — hashed IPs, no cookies, GDPR-friendly
-- ⚡ **Edge-cached** — <100ms response when cached
-- 🆓 **100% free** — Cloudflare Workers + KV free tier
+The point of this project is that **you deploy your own instance**. Don't embed someone else's URL in your README — the counter would be tracking you through their service. In 5 minutes you get your own `https://<your-project>.deno.dev` and you own the data.
 
 ---
 
-## 🚀 Quick Embed
+## Features
 
-```markdown
-![Profile Views](https://profile-views.vermaarp.workers.dev/badge?user=YOUR_USERNAME)
-```
-
-**Live demo** → [profile-views.vermaarp.workers.dev](https://profile-views.vermaarp.workers.dev)
-
----
-
-## 🍎 Glass Badge Colors
-
-| Color | Preview embed |
-|-------|--------------|
-| `blue` | `![](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=blue)` |
-| `green` | `![](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=green)` |
-| `purple` | `![](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=purple)` |
-| `orange` | `![](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=orange)` |
-| `teal` | `![](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=teal)` |
-| `pink` | `![](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=pink)` |
-| `red` | `![](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=red)` |
+- Total views, unique visitors, and daily stats
+- Glass-style SVG badges with gradient shimmer
+- Path-based routing — clean URLs like `/badge/octocat`
+- Bot filtering (heuristic-based)
+- Rate limiting (5 increments per IP per user per hour)
+- Hashed IPs, no cookies, GDPR-friendly
+- Named sub-counters for per-repo tracking
+- Zero dependencies beyond the Deno standard runtime
 
 ---
 
-## 📦 Deploy in 5 Minutes
+## Quick deploy (5 minutes)
 
-### 1. Clone & install
+### 1. Fork or clone
 
 ```bash
 git clone https://github.com/Vermaarp/profile-views
 cd profile-views
-npm install
 ```
 
-### 2. Authenticate with Cloudflare
+### 2. Install Deno (if you don't have it)
 
 ```bash
-npx wrangler login
+curl -fsSL https://deno.land/install.sh | sh
 ```
 
-### 3. Create KV namespace
+### 3. Run locally
 
 ```bash
-npm run kv:create
-# Copy the two IDs printed and paste into wrangler.toml
+deno task dev
+# → http://localhost:8000
 ```
 
-### 4. Deploy
+### 4. Deploy to Deno Deploy
 
-```bash
-npm run deploy
-# Live at: https://profile-views.YOUR_SUBDOMAIN.workers.dev
-```
+1. Push your fork to GitHub.
+2. Go to [dash.deno.com](https://dash.deno.com) → **New Project**.
+3. Connect your GitHub repo, pick `main.ts` as the entrypoint.
+4. Done. You get `https://<your-project>.deno.dev`.
 
-### 5. Add to your GitHub profile README
+Deno KV is enabled automatically — no configuration, no database setup.
+
+---
+
+## Usage
+
+Replace `<your-project>` with your actual Deno Deploy subdomain, and `<your-username>` with any GitHub username.
 
 ```markdown
-![Profile Views](https://profile-views.YOUR_SUBDOMAIN.workers.dev/badge?user=YOUR_USERNAME&color=blue)
+![Profile Views](https://<your-project>.deno.dev/badge/<your-username>)
 ```
 
----
-
-## ⚙️ Badge Query Parameters
-
-| Param | Default | Options | Description |
-|-------|---------|---------|-------------|
-| `user` | *(required)* | any GitHub username | Username to track |
-| `label` | `Profile Views` | any string | Badge label text |
-| `color` | `blue` | `blue` `green` `purple` `orange` `teal` `pink` `red` or hex | Value gradient color |
-| `format` | `short` | `short` `full` | `1.2K` vs `1,234` |
-| `type` | `total` | `total` `unique` `daily` | Which counter to display |
-| `counter` | `default` | any string | Named counter (per-repo use) |
-
----
-
-## 📡 API Endpoints
-
-### `GET /badge` — Glass SVG badge
-```
-https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=purple
-```
-
-### `GET /api/v1/views` — JSON view count
-```
-https://profile-views.vermaarp.workers.dev/api/v1/views?user=Vermaarp
-```
-
-### `GET /stats` — JSON analytics (up to 30 days)
-```
-https://profile-views.vermaarp.workers.dev/stats?user=Vermaarp&days=7
-```
-
-### `GET /health` — Health check
-```
-https://profile-views.vermaarp.workers.dev/health
-```
-
-Full OpenAPI spec: [`docs/openapi.yaml`](docs/openapi.yaml)
-
----
-
-## 🎨 Badge Examples
+### Colors
 
 ```markdown
-<!-- Blue glass (default) -->
-![Profile Views](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=blue)
+![](https://<your-project>.deno.dev/badge/<your-username>?color=blue)
+![](https://<your-project>.deno.dev/badge/<your-username>?color=green)
+![](https://<your-project>.deno.dev/badge/<your-username>?color=purple)
+![](https://<your-project>.deno.dev/badge/<your-username>?color=orange)
+![](https://<your-project>.deno.dev/badge/<your-username>?color=teal)
+![](https://<your-project>.deno.dev/badge/<your-username>?color=pink)
+![](https://<your-project>.deno.dev/badge/<your-username>?color=red)
+```
 
-<!-- Purple, unique visitors -->
-![Unique Visitors](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=purple&type=unique&label=Unique+Visitors)
+Or a custom hex: `?color=ff6b6b`.
 
-<!-- Teal, today only -->
-![Today](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=teal&type=daily&label=Views+Today)
+### Other options
 
-<!-- Green, full number -->
-![Profile Views](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&color=green&format=full)
+```markdown
+<!-- Unique visitors -->
+![](https://<your-project>.deno.dev/badge/<your-username>?type=unique&label=Unique+Visitors)
+
+<!-- Today's views, full number -->
+![](https://<your-project>.deno.dev/badge/<your-username>?type=daily&format=full&label=Today)
 
 <!-- Per-repo counter -->
-![Repo Views](https://profile-views.vermaarp.workers.dev/badge?user=Vermaarp&counter=my-project&label=Repo+Views&color=orange)
+![](https://<your-project>.deno.dev/badge/<your-username>?counter=my-repo&label=Repo+Views)
 ```
 
 ---
 
-## 🏗️ Project Structure
+## API
 
-```
-profile-views/
-├── api/
-│   ├── index.js              # Worker entry point & routing
-│   ├── routes/
-│   │   ├── badge.js          # SVG glass badge route
-│   │   ├── stats.js          # JSON analytics route
-│   │   ├── docs.js           # API docs route
-│   │   └── health.js         # Health check
-│   └── utils/
-│       ├── bot-filter.js     # Bot detection (25+ patterns)
-│       ├── rate-limit.js     # KV-backed rate limiter
-│       └── response.js       # Response helpers & CORS
-├── badge/
-│   └── render.js             # Glass SVG generation engine
-├── db/
-│   └── schema.md             # KV key schema documentation
-├── docs/
-│   └── openapi.yaml          # OpenAPI 3.1 specification
-├── examples/
-│   └── README-examples.md    # Badge embed examples
-├── .github/
-│   ├── workflows/ci.yml      # CI/CD → auto deploy on push
-│   └── ISSUE_TEMPLATE/       # Bug & feature templates
-├── wrangler.toml             # Cloudflare Workers config
-└── package.json
-```
+| Endpoint | Description |
+|---|---|
+| `GET /badge/:user` | SVG badge |
+| `GET /api/views/:user` | Current counts as JSON |
+| `GET /api/stats/:user?days=7` | Daily history (up to 30 days) |
+| `GET /health` | Health check |
+| `GET /` | Endpoint index |
+
+### Query parameters (badge)
+
+| Param | Default | Options |
+|---|---|---|
+| `label` | `Profile Views` | any string |
+| `color` | `blue` | `blue` `green` `purple` `orange` `teal` `pink` `red` or hex |
+| `format` | `short` | `short` (1.2K) or `full` (1,234) |
+| `type` | `total` | `total` `unique` `daily` |
+| `counter` | *(none)* | any string — creates a separate sub-counter |
 
 ---
 
-## 🔐 Privacy & Security
+## Privacy
 
-- **No cookies** — zero tracking cookies ever set
-- **Hashed IPs** — one-way hashed, never stored raw
-- **TTL'd data** — unique visit markers expire after 24h; daily stats after 7 days
-- **GDPR-friendly** — no personal data stored at any point
-- **Bot filtering** — 25+ bot UA patterns blocked from inflating counts
-- **Rate limiting** — max 5 increments per IP per username per hour
+- **No cookies.** Ever.
+- **Hashed IPs** — SHA-256 with a salt, truncated, never stored raw.
+- **Short TTLs** — unique-visit markers expire after 24h, daily counters after 7 days, rate-limit windows after 1h.
+- **No personal data** — nothing that could identify a visitor is persisted.
 
 ---
 
-## 📊 KV Storage Schema
+## KV schema
 
-| Key | TTL | Description |
-|-----|-----|-------------|
-| `views:{user}` | permanent | All-time total views |
-| `unique:{user}` | permanent | All-time unique visitors |
-| `uniq:{user}:{hashedIP}` | 24h | Unique visit marker |
-| `daily:{user}:{YYYY-MM-DD}` | 7 days | Daily view count |
-| `rl:{user}:{hashedIP}` | 1h | Rate limit counter |
+| Key | TTL | Value |
+|---|---|---|
+| `["views", scope]` | permanent | total view count |
+| `["unique", scope]` | permanent | unique visitor count |
+| `["daily", scope, "YYYY-MM-DD"]` | 7 days | daily view count |
+| `["uniq", scope, hashedIP]` | 24h | unique-visit marker |
+| `["rl", scope, hashedIP]` | 1h | rate-limit counter |
 
----
-
-## 🤝 Contributing
-
-Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md) to get started.
-
-- 🐛 [Report a bug](.github/ISSUE_TEMPLATE/bug_report.md)
-- 💡 [Request a feature](.github/ISSUE_TEMPLATE/feature_request.md)
+`scope` is `username` by default, or `username:counter` when the `counter` param is set.
 
 ---
 
-## 📄 License
+## License
 
-MIT © [Vermaarp](https://github.com/Vermaarp) — see [LICENSE](LICENSE)
+MIT
