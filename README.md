@@ -5,12 +5,13 @@
 ![License](https://img.shields.io/badge/license-MIT-blue)
 ![Runtime](https://img.shields.io/badge/runtime-Deno_Deploy-000000)
 ![Free](https://img.shields.io/badge/cost-free-brightgreen)
+![Profile Views](https://profile-views.vermaarp.deno.net/badge/vermaarp?color=blue)
 
 ---
 
 ## Why self-host?
 
-The point of this project is that **you deploy your own instance**. Don't embed someone else's URL in your README — the counter would be tracking you through their service. In 5 minutes you get your own `https://<your-project>.deno.dev` and you own the data.
+The point of this project is that **you deploy your own instance**. Don't embed someone else's URL in your README — the counter would be tracking you through their service. In 5 minutes you get your own `https://<your-project>.deno.net` and you own the data.
 
 ---
 
@@ -54,9 +55,9 @@ deno task dev
 1. Push your fork to GitHub.
 2. Go to [dash.deno.com](https://dash.deno.com) → **New Project**.
 3. Connect your GitHub repo, pick `main.ts` as the entrypoint.
-4. Done. You get `https://<your-project>.deno.dev`.
+4. Done. You get `https://<your-project>.deno.net`.
 
-Deno KV is enabled automatically — no configuration, no database setup.
+> If the first deploy fails with `Deno.openKv is not a function`, open your project's **Settings → KV Database** on Deno Deploy and provision a KV instance, then redeploy.
 
 ---
 
@@ -65,19 +66,19 @@ Deno KV is enabled automatically — no configuration, no database setup.
 Replace `<your-project>` with your actual Deno Deploy subdomain, and `<your-username>` with any GitHub username.
 
 ```markdown
-![Profile Views](https://<your-project>.deno.dev/badge/<your-username>)
+![Profile Views](https://<your-project>.deno.net/badge/<your-username>)
 ```
 
 ### Colors
 
 ```markdown
-![](https://<your-project>.deno.dev/badge/<your-username>?color=blue)
-![](https://<your-project>.deno.dev/badge/<your-username>?color=green)
-![](https://<your-project>.deno.dev/badge/<your-username>?color=purple)
-![](https://<your-project>.deno.dev/badge/<your-username>?color=orange)
-![](https://<your-project>.deno.dev/badge/<your-username>?color=teal)
-![](https://<your-project>.deno.dev/badge/<your-username>?color=pink)
-![](https://<your-project>.deno.dev/badge/<your-username>?color=red)
+![](https://<your-project>.deno.net/badge/<your-username>?color=blue)
+![](https://<your-project>.deno.net/badge/<your-username>?color=green)
+![](https://<your-project>.deno.net/badge/<your-username>?color=purple)
+![](https://<your-project>.deno.net/badge/<your-username>?color=orange)
+![](https://<your-project>.deno.net/badge/<your-username>?color=teal)
+![](https://<your-project>.deno.net/badge/<your-username>?color=pink)
+![](https://<your-project>.deno.net/badge/<your-username>?color=red)
 ```
 
 Or a custom hex: `?color=ff6b6b`.
@@ -86,13 +87,13 @@ Or a custom hex: `?color=ff6b6b`.
 
 ```markdown
 <!-- Unique visitors -->
-![](https://<your-project>.deno.dev/badge/<your-username>?type=unique&label=Unique+Visitors)
+![](https://<your-project>.deno.net/badge/<your-username>?type=unique&label=Unique+Visitors)
 
 <!-- Today's views, full number -->
-![](https://<your-project>.deno.dev/badge/<your-username>?type=daily&format=full&label=Today)
+![](https://<your-project>.deno.net/badge/<your-username>?type=daily&format=full&label=Today)
 
 <!-- Per-repo counter -->
-![](https://<your-project>.deno.dev/badge/<your-username>?counter=my-repo&label=Repo+Views)
+![](https://<your-project>.deno.net/badge/<your-username>?counter=my-repo&label=Repo+Views)
 ```
 
 ---
